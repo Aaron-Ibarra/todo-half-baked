@@ -23,25 +23,40 @@ todoForm.addEventListener('submit', async (e) => {
     const item = data.get('todo');
     await createTodo(item);
     todoForm.reset();
+    displayTodos();
 });
 
 // create todo state
-
+// let todos = [];
 // add async complete todo handler function
+// async function handleComplete() {}
 // call completeTodo
 // swap out todo in array
 // call displayTodos
 
 async function displayTodos() {
     // clear the container (.innerHTML = '')
+    todosEl.innerHTML = '';
     // display the list of todos,
     // call render function, pass in state and complete handler function!
     // append to .todos
+    const todoList = await getTodos();
+    if (todoList) {
+        for (let todo of todoList) {
+            const todoEl = renderTodo(todo);
+            todoEl.addEventListener('click', () => {});
+            todosEl.append(todoEl);
+        }
+    }
 }
 
 // add page load function
-// fetch the todos and store in state
-// call displayTodos
+window.addEventListener('load', async () => {
+    // fetch the todos and store in state
+    // call displayTodos
+
+    displayTodos();
+});
 
 logoutButton.addEventListener('click', () => {
     logout();
